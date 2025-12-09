@@ -9,7 +9,7 @@ root/
 ├── week01-docker-basic-api/
 │   ├── src/
 │   ├── Dockerfile
-│   └── [README.md](http://readme.md/)
+│   └── [README.md](https://github.com/fredpen/10wks-docker-k8s-eks-aws-journey/blob/week01/week01-docker-basic-api/backend/README.md)
 │
 ├── week02-docker-compose-multiservice/
 │   ├── backend/

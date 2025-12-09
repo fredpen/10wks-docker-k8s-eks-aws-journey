@@ -14,6 +14,7 @@ RUN npm install
 
 # Copy the rest of the application files
 # This is always confusing but its always <source> <destination> in docker
+# When using full copy you can use docker ignore to exclude files
 COPY . .
 
 # Build the NestJS application

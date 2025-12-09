@@ -1,8 +1,10 @@
 # 10wks-docker-k8s-eks-aws-journey
+
 10-Week Hands-On Docker → Kubernetes → AWS → CI/CD Roadmap
 
 Repository Structure
 
+```bash
 root/
 ├── [README.md](http://readme.md/)
 │
@@ -77,3 +79,5 @@ root/
 │   └── terraform/  (optional)
 ├── .github/workflows/
 └── [README.md](http://readme.md/)
+
+

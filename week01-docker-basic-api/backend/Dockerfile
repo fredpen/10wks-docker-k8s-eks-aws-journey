@@ -1,0 +1,26 @@
+# Use the official Node.js image as the base image
+FROM node:22
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+# Copy package.json and package-lock.json to the working directory
+# Copying the json file prior to the application code is an optmization technique to ensure
+# That steps only run when there is a change in dependencies and not just to any change in code
+COPY package*.json ./
+
+# Install the application dependencies
+RUN npm install
+
+# Copy the rest of the application files
+# This is always confusing but its always <source> <destination> in docker
+COPY . .
+
+# Build the NestJS application
+RUN npm run build
+
+# Expose the application port
+EXPOSE 3000
+
+# Command to run the application
+CMD ["node", "dist/main"]

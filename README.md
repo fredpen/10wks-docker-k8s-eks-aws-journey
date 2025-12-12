@@ -17,7 +17,7 @@ root/
 │   ├── postgres/
 │   ├── redis/
 │   ├── docker-compose.yml
-│   └── [README.md](http://readme.md/)
+│   └── [README.md](https://github.com/fredpen/10wks-docker-k8s-eks-aws-journey/tree/main/week02-docker-compose-multiservice)
 │
 ├── week03-docker-optimized-images/
 │   ├── src/

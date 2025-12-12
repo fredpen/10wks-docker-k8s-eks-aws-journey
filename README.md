@@ -77,3 +77,30 @@ root/
 │   └── terraform/  (optional)
 ├── .github/workflows/
 └── [README.md](http://readme.md/)
+
+week11-gitops-argocd/
+│   ├── apps/
+│   │   ├── app1/
+│   │   │   ├── k8s/
+│   │   │   └── kustomization.yaml
+│   │   ├── app2/
+│   │   └── kustomization.yaml
+│   ├── argocd/
+│   │   ├── application.yaml
+│   │   └── project.yaml
+│   ├── README.md
+
+
+week12-gitops-fluxcd/
+├── clusters/
+│   └── production/
+│       ├── kustomization.yaml
+│       ├── apps.yaml
+│       └── monitoring.yaml
+├── apps/
+│   ├── api-service/
+│   └── frontend/
+├── flux/
+│   ├── gotk-components.yaml
+│   ├── gotk-sync.yaml
+├── README.md

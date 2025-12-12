@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "start:dev": "nodemon main.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "pg": "^8.16.3",
+    "redis": "^5.10.0"
+  }
+}

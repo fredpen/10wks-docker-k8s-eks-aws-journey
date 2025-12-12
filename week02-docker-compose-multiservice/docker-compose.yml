@@ -8,10 +8,14 @@ services:
       - "3000:3000"
     env_file:
       - ./backend/.env
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: ${API_COMMAND}
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
+      my-redis:
         condition: service_healthy
     networks:
       - nest-api
@@ -20,12 +24,13 @@ services:
     build:
       context: postgres
       dockerfile: Dockerfile
-    container_name: postgres
+    container_name: ${POSTGRES_HOST}
     restart: no
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PORT: ${POSTGRES_PORT}
     ports:
       - "5439:5432"
     volumes:
@@ -38,12 +43,12 @@ services:
     networks:
       - nest-api
 
-  redis:
+  my-redis:
     image: redis:7
-    container_name: redis
+    container_name: my-redis
     command: ["redis-server", "--appendonly", "yes"]
     ports:
-      - "6379:6379"
+      - "6378:6379"
     volumes:
       - redisdata:/data
     healthcheck:

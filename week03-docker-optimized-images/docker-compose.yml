@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    container_name: backend
+#    command: ${API_COMMAND}
+#    volumes:
+#      - ./backend:/usr/src/app
+#      - /usr/src/app/node_modules
+    ports:
+      - 3000:3000
+    networks:
+      - nest-app
+
+networks:
+  nest-app:

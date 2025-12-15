@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:22
+FROM node:22 AS builder
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -19,6 +19,22 @@ COPY . .
 
 # Build the NestJS application
 RUN npm run build
+
+FROM node:lts-alpine AS runner
+
+WORKDIR /usr/src/app
+
+# Copy only needed files from builder
+#COPY --from=builder /usr/src/app/node_modules ./node_modules
+COPY --from=builder /usr/src/app/dist ./dist
+COPY --from=builder /usr/src/app/tsconfig.json ./
+COPY --from=builder /usr/src/app/package.json ./
+COPY --from=builder /usr/src/app/package-lock.json ./
+
+
+#npm clean install without dev dependecies
+RUN npm ci --omit=dev
+
 
 # Expose the application port
 EXPOSE 3000

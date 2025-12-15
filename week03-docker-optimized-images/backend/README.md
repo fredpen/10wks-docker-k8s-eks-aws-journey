@@ -1,56 +1,197 @@
+````
+Week 3 — Optimized Images & Multi-Stage Builds
 
-## Objective of the week
-**Containerize a Simple Backend API (Docker Basics)**
+Project: Optimize the Week 2 Node + Postgres + Redis setup
 
-**Goal:** Learn Docker fundamentals and containerize your first application.
+🎯 Week 3 Objectives
 
-### **Objectives**
+Understand Docker image layers and size trade-offs
 
-- Understand containers, images, Dockerfiles, layers.
-- Build and run your first Dockerized application.
+Use multi-stage builds
 
-### **Tasks**
+Create a reusable custom base image
 
-- Build a very simple API (Node.js/Express).
-    - Routes: `/health`, `/hello`, `/users` (static JSON)
-- Write a Dockerfile:
-    - Use official base image
-    - Install dependencies
-    - Copy source code
-    - Expose port
-    - Add entrypoint
-- Build Docker image locally.
-- Run container locally.
-- Use `docker logs`, `docker exec`, `docker ps`, `docker stop`.
-- Push the image to Docker Hub.
+Produce a production-ready Docker image
 
-### **Deliverables**
+🧩 TODOs (Step-by-Step)
+🔹 1. Baseline: Measure Current Image
 
-- GitHub repo with API + Dockerfile.
-- Image live on Docker Hub.
-- README explaining how to run your container.
+Build the existing Node app image from Week 2
+
+Check image size using docker images
+
+Inspect image layers using docker history <image>
+
+Document:
+
+Image size
+
+Number of layers
+
+Base image used
+
+🔹 2. Introduce Multi-Stage Docker Build
+
+Create a new Dockerfile.multi-stage
+
+Add build stage:
+
+Use node:18 (or similar)
+
+Install all dependencies
+
+Build app if needed
+
+Add runtime stage:
+
+Use node:18-alpine
+
+Copy only required files from build stage
+
+Remove dev dependencies from final image
+
+Build image and compare size vs baseline
+
+🔹 3. Reduce Image Size Further
+
+Add .dockerignore:
+
+node_modules
+
+logs
+
+tests
+
+.git
+
+Remove unnecessary OS packages
+
+Ensure only production dependencies are installed
+
+Verify app still runs correctly
+
+🔹 4. Add Healthcheck to Dockerfile
+
+Add HEALTHCHECK instruction
+
+Create /health endpoint in Node app
+
+Verify container health using:
+
+docker inspect --format='{{.State.Health.Status}}'
+
+🔹 5. Create a Custom Base Image
+
+Create custom-base-image/ folder
+
+Write base Dockerfile:
+
+Alpine-based Node image
+
+Non-root user
+
+Common OS packages only
+
+Build base image locally
+
+Tag image (yourname/node-base:1.0)
+
+Push base image to Docker Hub
+
+🔹 6. Refactor App to Use Custom Base Image
+
+Update multi-stage Dockerfile to use custom base image
+
+Rebuild application image
+
+Verify:
+
+App starts correctly
+
+Postgres and Redis connections still work
+
+🔹 7. Compare Results
+
+Document before/after image sizes
+
+Compare:
+
+Build time
+
+Runtime size
+
+Startup speed
+
+Add table to README
+
+Example:
+
+Version	Image Size
+Week 2	320MB
+Multi-stage	95MB
+Custom base	68MB
+🔹 8. Cleanup & Best Practices
+
+Ensure container runs as non-root user
+
+Pin base image versions
+
+Add NODE_ENV=production
+
+Remove unused ENV variables
+
+Run docker scan (optional)
+
+🔹 9. Documentation
+
+Update Week 3 README with:
+
+What changed
+
+Why multi-stage builds matter
+
+Lessons learned
+
+Add diagrams or layer screenshots (optional)
+
+🔹 10. Git Hygiene
+
+Commit in logical steps:
+
+refactor(week03): convert Dockerfile to multi-stage build
+perf(week03): reduce image size using alpine base
+build(week03): add custom node base image
+docs(week03): document optimization results
+
+
+Tag repository:
+
+git tag -a week03 -m "Week 3: Docker image optimization"
+
+🎉 End-of-Week Definition of Done
+
+✔ Image size reduced by 60%+
+✔ Multi-stage build implemented
+✔ Custom base image published
+✔ Healthcheck added
+✔ README clearly documents improvements
 
 
 
-## Compile and run the project
 
-```bash
-# docker - Build and tag your app
-$ docker build -t week01-app .
+🔹 9. Documentation
 
-# Run the image 
-# Another confusing thing post is always host machine to container.
-$ docker run -p 3000:3000 week01-app
+Update Week 3 README with:
 
-# check logs 
-$ docker logs ${container_id}
+What changed
+I started building the node image from node:slim for the build process 
+Implement a multi stage docker to 
+    - To optimize image size
+    - Separate the build process from the running process 
+    - Smaller images = less attack surface area
+    - Faster deployments and cleaner systems
 
-# stop container 
-$ docker stop ${container_id}
+Why multi-stage builds matter
 
-# start container 
-$ docker start ${container_id}
-
-
-
-```
+Lessons learned
+my image went from 438.41 to 59

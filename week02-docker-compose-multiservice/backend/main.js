@@ -19,8 +19,15 @@ app.get('/cache', async (req, res) => {
 
 app.get('/database', async (req, res) => {
   const db = await pgPool();
-  const response = await db.query('SELECT * FROM city');
+  const response = await db.query('SELECT * FROM city ORDER BY id ASC');
   res.send(response.rows);
+});
+
+app.get('/insert', async (req, res) => {
+  const db = await pgPool();
+  await db.query('CREATE TABLE IF NOT EXISTS city (ID SERIAL PRIMARY KEY, name VARCHAR(30))');
+  await db.query('INSERT INTO city (name) VALUES ($1)', ['Manchester']);
+  res.send('Done');
 });
 
 app.listen(port, () => {

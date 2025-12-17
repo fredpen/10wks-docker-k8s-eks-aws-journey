@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:22
+FROM node:lts-alpine
 
 # Set the working directory inside the container
 WORKDIR /usr/src/app
@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install the application dependencies
-RUN npm install
+RUN npm ci --omit=dev
 
 # Copy the rest of the application files
 # This is always confusing but its always <source> <destination> in docker

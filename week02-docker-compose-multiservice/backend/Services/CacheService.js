@@ -1,8 +1,8 @@
 import { createClient } from 'redis';
 
 const redisClient = async () => {
-  const { REDIS_PORT } = process.env;
-  const url = `redis://my-redis:${REDIS_PORT}`;
+  const { REDIS_PORT, REDIS_HOST } = process.env;
+  const url = `redis://${REDIS_HOST}:${REDIS_PORT}`;
   return await createClient({ url, database: 0 })
     .on('error', (err) => console.log('Redis Client Error', err))
     .connect();
@@ -10,8 +10,9 @@ const redisClient = async () => {
 
 
 export const setCache = async (key, value) => {
+  const { REDIS_TTL } = process.env;
   const client = await redisClient();
-  return client.set(key, value, { EX: 6000 });
+  return client.set(key, value, { EX: REDIS_TTL });
 };
 
 export const getCache = async (key) => {

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: api-container
-          image: fredrickksola/nestimage:0.2.0
+          image: fredrickksola/nestimage:week02
           imagePullPolicy: IfNotPresent
           envFrom:
             - secretRef:

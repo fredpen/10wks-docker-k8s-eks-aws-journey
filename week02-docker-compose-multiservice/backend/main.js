@@ -17,6 +17,10 @@ app.get('/cache', async (req, res) => {
   res.send(`I have visited the cache page ${Number(currentVisit) + 1}`);
 });
 
+app.get('/env', async (req, res) => {
+  res.send(process.env);
+});
+
 app.get('/database', async (req, res) => {
   const db = await pgPool();
   const response = await db.query('SELECT * FROM city ORDER BY id ASC');

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+spec:
+  replicas: 2 # Start with 1 replica
+  selector:
+    matchLabels:
+      app: api-app
+  template:
+    metadata:
+      labels:
+        app: api-app # Label for the Service selector
+    spec:
+      containers:
+        - name: api-container
+          image: fredrickksola/nestimage:week02
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: api-secret
+            - configMapRef:
+                name: api-config
+          ports:
+            - containerPort: 3000 #my nestjs expose port
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"

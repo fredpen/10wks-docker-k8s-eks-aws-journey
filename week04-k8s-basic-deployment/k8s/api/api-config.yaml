@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+data:
+  #Env Management
+  PORT: "3000"
+  NODE_ENV: "development"
+  API_URL: "http://api.internal"
+  LOG_LEVEL: "INFO"
+
+  #Database
+  POSTGRES_DB: "devdb"
+  POSTGRES_PORT: "5432"
+  POSTGRES_HOST: "postgres-service"
+
+  # Redis
+  REDIS_PORT: "6379"
+  REDIS_TTL: "3000"
+  REDIS_HOST: "redis-service"

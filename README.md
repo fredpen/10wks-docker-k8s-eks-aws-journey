@@ -23,7 +23,7 @@ root/
 │   ├── src/
 │   ├── Dockerfile.multi-stage
 │   ├── custom-base-image/
-│   └── [README.md](http://readme.md/)
+│   └── [README.md](https://github.com/fredpen/10wks-docker-k8s-eks-aws-journey/tree/main/week03-docker-optimized-images)
 │
 ├── week04-k8s-basic-deployment/
 │   ├── k8s/

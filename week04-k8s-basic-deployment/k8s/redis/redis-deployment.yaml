@@ -1,32 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-deployment
+  name: redis-deployment
+  labels:
+    app: redis-deployment
 spec:
-  replicas: 2 # Start with 1 replica
+  replicas: 1
   selector:
     matchLabels:
-      app: api-app
+      app: redis-deployment
   template:
     metadata:
       labels:
-        app: api-app # Label for the Service selector
+        app: redis-deployment
     spec:
       containers:
-        - name: api-container
-          image: fredrickksola/nestimage:week02
-          imagePullPolicy: IfNotPresent
-          envFrom:
-            - secretRef:
-                name: api-secret
-            - configMapRef:
-                name: api-config
+        - name: redis
+          image: redis:7-alpine
           ports:
-            - containerPort: 3000 #my nestjs expose port
-          resources:
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
-            requests:
-              memory: "128Mi"
-              cpu: "250m"
+            - containerPort: 6379

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: postgres
-          image: postgres:14 # Use a specific, stable version of the Postgres image
+          image: postgres:14
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 5432 # Default Postgres port

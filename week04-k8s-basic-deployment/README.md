@@ -38,12 +38,12 @@ Each file maps to **one Kubernetes concept**.
   - Your application run in a pod, a node is more of an infrastructure component like a space on a physical machine that 
     hosts the pod(application) and the kubernetes agents
 * Why **Deployments** exist
-    - Deployments exists as a higher level abstractionf or managing applications 
-    - we cant be checking whats running every time and create a new one
+    - Deployments exists as a higher level abstraction for managing applications 
+    - we cant be checking what's running every time and create a new one
     - Deployment manage application availability and health rollbacks with declarative management in a yaml file
 * How Kubernetes runs containers
-  - Kubernetes is the brain and it doesnt run the containers itself 
-    - A deloyment or controller define a desired state through yaml file 
+  - Kubernetes is the brain and it doesn't run the containers itself 
+    - A deployment or controller define a desired state through yaml file 
     - kube-scheduler (a control plane component) who is always watching pods picks up the task and determine 
       Which node should run the request
     - Node Agent (kubelet) - is what actually does the work of orchestrating 
@@ -51,7 +51,7 @@ Each file maps to **one Kubernetes concept**.
       - Unpack and configure
       - Execute the image
       - Monitor and report back to the API server 
-      - Also responsible for restarting pods 
+      - Also, responsible for restarting pods 
 * How replicas work
   - You defined a desired state of your application
   - Kubernetes checks consistently what the actual state is and what the expected states is
@@ -67,7 +67,7 @@ Each file maps to **one Kubernetes concept**.
 ### 🧠 Concepts to Understand
 
 * `spec.replicas`
-  - This instruct k8s on how many replicas of your application it should keep
+  - This instructs k8s on how many replicas of your application it should keep
 * `containers.image`
   - This the image that serves as the blueprint of your application it is a complete package of your application
 * `ports.containerPort`
@@ -78,7 +78,7 @@ Each file maps to **one Kubernetes concept**.
 * `imagePullPolicy`
   - Determine how k8s pull your image 
     - Always - will pull latest image 
-    - if not present will pull if images doesn't exists - good for production 
+    - if not present will pull if images doesn't exist - good for production 
     - never 
 
 ### 🛠️ Tasks
@@ -106,7 +106,7 @@ Each file maps to **one Kubernetes concept**.
 
 * Why Pods are **not** directly reachable
   - Pods Are Ephemeral and Have Dynamic IPs
-    - Pods dies and they are temporary and connecting to it directly would break access when pods crashes 
+    - Pods dies and, they are temporary and connecting to it directly would break access when pods crashes 
     - Their endpoints are unreliable 
     - Abstraction - k8s needs a stable front door to your application and pods ip are not a stable way to that
   - Networking and Isolation (The "Flat" Network)
@@ -117,7 +117,7 @@ Each file maps to **one Kubernetes concept**.
 
 * How Kubernetes networking works
   - You talk to service -> service talks to healthy pods 
-  - Service is a contract and can be implemented with load balancer, ingress, Nodeport, Ingress etc 
+  - Service is a contract and can be implemented with load balancer, clusterIp ingress, Nodeport, Ingress etc 
 * Stable service discovery
   - This is how k8s handles connection and availability of resources and communicate 
   - Incoming traffic wants to talk to an app 
@@ -179,7 +179,7 @@ spec:
 ### 🔍 What You Learn
 
 * Separation of config from code
-  - This prevent you from rebuiding your image just because the config changes or havng a different image for env cause of config values 
+  - This prevents you from rebuilding your image just because the config changes or having a different image for env cause of config values 
   - The idea is that same image or application should be:
     - deployable anywhere
     - But work differently based on the configuration
@@ -193,7 +193,7 @@ spec:
 ### 🧠 Concepts to Understand
 
 * `ConfigMap`
-  - This is specifically use to store non confidential values
+  - This is specifically use to store non-confidential values
   - Ensure configs and environmental variables are separate from the image
 * `envFrom`
 * Key-value injection
@@ -226,7 +226,7 @@ spec:
 * Why secrets are treated differently
 * Base64 encoding
   - This is not an encryption or secure it can easily be decoded
-  - it is ann encoding pattern that convert binaries like file,images or cert to text 
+  - it is an encoding pattern that convert binaries like file,images or cert to text 
     to be transmitted over system that can only handle text
   - It serves as a easy way for k8s to handle this values, it is not a security option
 * Secure env injection

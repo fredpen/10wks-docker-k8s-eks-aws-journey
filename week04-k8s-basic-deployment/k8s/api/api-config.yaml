@@ -15,6 +15,6 @@ data:
   POSTGRES_HOST: "postgres-service"
 
   # Redis
-  REDIS_PORT: "INFO"
-  REDIS_TTL: "INFO"
-  REDIS_HOST: "INFO"
+  REDIS_PORT: "6379"
+  REDIS_TTL: "3000"
+  REDIS_HOST: "redis-service"
